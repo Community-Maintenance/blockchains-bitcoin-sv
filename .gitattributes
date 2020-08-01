@@ -1,4 +1,4 @@
 
 * annex.backend=SHA3_512E
-* annex.largerfiles=largerthan=4096
+* annex.largefiles=largerthan=4096
 **/.git* annex.largefiles=nothing
