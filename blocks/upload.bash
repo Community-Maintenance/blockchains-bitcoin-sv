@@ -16,6 +16,5 @@ do
 	done
 	git commit -m "added $blknum"
 	git annex sync origin
-	git annex unlock .
 	num=$((num+1))
 done
