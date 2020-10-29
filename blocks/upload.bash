@@ -7,12 +7,12 @@ do
 	then
 		break
 	fi
-	git annex add *"$blknum" &&
-	git annex unlock *"$blknum" &&
-	git annex copy *"$blknum" --to=skynet || exit -1
-	while ! git annex fsck -f skynet *"$blknum"
+	git annex add blk"$blknum" &&
+	git annex unlock blk"$blknum" &&
+	git annex copy blk"$blknum" --to=skynet || exit -1
+	while ! git annex fsck -f skynet blk"$blknum"
 	do
-		git annex copy *"$blknum" --to=skynet
+		git annex copy blk"$blknum" --to=skynet
 	done
 	git commit -m "added $blknum"
 	git annex sync origin
