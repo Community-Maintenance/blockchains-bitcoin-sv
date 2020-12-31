@@ -7,14 +7,17 @@ do
 	then
 		break
 	fi
-	git annex add blk"$blknum" &&
-	git annex unlock blk"$blknum" &&
-	git annex copy blk"$blknum" --to=skynet || exit -1
-	while ! git annex fsck -f skynet blk"$blknum"
-	do
-		git annex copy blk"$blknum" --to=skynet
-	done
-	git commit -m "added $blknum"
-	git annex sync origin
+	if ! git annex fsck -f skynet blk"$blknum"
+    then
+	    git annex add blk"$blknum" &&
+	    git annex unlock blk"$blknum" &&
+	    git annex copy blk"$blknum" --to=skynet || exit -1
+	    while ! git annex fsck -f skynet blk"$blknum"
+	    do
+	    	git annex copy blk"$blknum" --to=skynet
+	    done
+	    git commit -m "added $blknum"
+	    git annex sync origin
+    fi
 	num=$((num+1))
 done
