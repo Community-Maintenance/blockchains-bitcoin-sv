@@ -7,12 +7,12 @@ do
 	then
 		break
 	fi
-	if ! git annex fsck -f skynet blk"$blknum"
+	if ! git annex --debug fsck -f skynet blk"$blknum"
     then
 	    git annex add blk"$blknum" &&
 	    git annex unlock blk"$blknum" &&
 	    git annex copy blk"$blknum" --to=skynet || exit -1
-	    while ! git annex fsck -f skynet blk"$blknum"
+	    while ! git annex --debug fsck -f skynet blk"$blknum"
 	    do
 	    	git annex copy blk"$blknum" --to=skynet
 	    done
